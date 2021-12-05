@@ -1,0 +1,66 @@
+﻿<!--Ниже подключаем пространство имён из DTO, т.к. оно потребуется нам в данном представлении-->
+@using Kursovaiy_vet_DTO.Models;
+<!--Объявляем модель объекта, которую представление готово будет получить от контроллера -->
+@model List<Pet>;
+<section class="section">
+    <div class="container">
+        <div class="header">
+            <div class="header__text">Our patients</div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <!--В следующей строчке мы объявляем form аналогичную HTML коду, однако изменяем целевой путь на Home->DelPet-->
+        @using (Html.BeginForm("DelPet", "Home", FormMethod.Post))
+        {
+            <div class="bd">
+                <table class="bd__table">
+                    <tr class="bd__stroka">
+                        <th class="bd__zag">ID</th>
+                        <th class="bd__zag">Name</th>
+                        <th class="bd__zag">Age</th>
+                        <th class="bd__zag">Breed</th>
+                        <th class="bd__zag">Owner's name</th>
+                        <th class="bd__zag">Diagnosis</th>
+                        <th class="bd__zag">Select</th>
+                    </tr>
+                    <!--Объявляем счетчик i, значение которого устанавливаем равным нулю-->
+                    @{
+                        int i = 0;
+                    }
+                    <!--Следующий код, позволяет отрисовать строку таблицы для каждого животного, переданного данному представлению 
+                        из контроллера (согласно объявленной ранее модели)-->
+                    @foreach (Pet zver in Model)
+                    {
+                        <tr class="bd__stroka">
+                            <td class="bd__yach">@zver.Id</td>
+                            <td class="bd__yach">@zver.Name</td>
+                            <td class="bd__yach">@zver.Age</td>
+                            <td class="bd__yach">@zver.BreedName.BreedName</td>
+                            <td class="bd__yach">@zver.Owner.SecondName</td>
+                            <td class="bd__yach">@zver.DiagnosName.DiagnosName</td>
+                            <!--Следующая строчка добавляет скрытое поле, в котором будет хранится порядковый номер полученного 
+                                из контроллера животного-->
+                            <!--Каждому порядковому номеру животного сопоставляется его уникальный идентификатор животного из БД-->
+                            @Html.Hidden("id[" + i + "]", zver.Id)
+                            <!--В следующей строке мы создаем CheckBox для каждого животного.-->
+                            <!--Проблема в том, что если CheckBox будет не отмечен явно, 
+                                то он не передастся в контроллер из этого представления-->
+                            <td class="bd__yach">@Html.CheckBox("isChecked[" + i + "]")</td>
+                            <!--Поэтому в следующей строчке мы явно задаем значение CheckBoxу как false-->
+                            @Html.Hidden("isChecked[" + i + "]", false)
+                            <!--Далее мы просто увеличиваем счетчик i на единицу и переходим к следующему зверю из полученного списка-->
+                            @{
+                                i++;
+                            }
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="btn__delete">
+                <button class="btn">Вылечен и выписан</button>
+            </div>
+        }
+    </div>
+</section>

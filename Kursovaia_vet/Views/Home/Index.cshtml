@@ -1,0 +1,50 @@
+﻿<!--Страница Index-->
+<!--Ниже описан кусок кода, который будет выполняться, если в контроллере были предварительно добавлены данные в переменную TempData-->
+<!--Переменная TempData является встроенным средством фреймворка ASP.NET, позволяющим передать данные из контроллера в представление-->
+@if(null != TempData["alert"]) {
+<script type="text/javascript">
+    alert('@TempData["alert"]');
+</script>
+}
+<section class="section">
+    <div class="container">
+        <ul class="admin__reg">
+            <li class="admin__reg-window">
+                <div class="admin__reg-header"> For employees</div>
+                <!--Описанная ниже form позволяет передать данные в контроллер Home->Index, через POST запрос-->
+                <form method="post">
+                    <ul class="admin__login">
+                        <li class="admin__login-info">
+                            <div class="admin__login-text">Login</div>
+                            <input type="text" name="login" class="admin__reg-input">
+                        </li>
+                        <li class="admin__login-info">
+                            <div class="admin__login-text">Password</div>
+                            <input type="text" name="pass" class="admin__reg-input">
+                        </li>
+                    </ul>
+                    <div class="btn__block">
+                        <button class="btn">Log in</button>
+                    </div>
+                </form>
+            </li>
+            <li class="admin__reg-window">
+                <div class="admin__reg-header">Animal registration</div>
+                <!--В следующей строчке мы объявляем form аналогичную HTML коду, однако изменяем целевой путь на Home->Adding-->
+                @using (Html.BeginForm("Adding", "Home", FormMethod.Post))
+                {
+                    <ul class="petlapa">
+                        <li class="admin__login-info">
+                            <div class="pet__lapka2">
+                                <img alt="pet" src="..//images/pet2.png">
+                            </div>                            
+                        </li>                        
+                    </ul>
+                    <div class="btn__block" >
+                        <button class="btn">Register</button>
+                    </div>
+                }
+            </li>
+        </ul>
+    </div>
+</section>

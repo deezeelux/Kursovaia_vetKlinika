@@ -1,0 +1,241 @@
+﻿body {
+    margin: 0;
+    font-family: 'Tajawal', sans-serif;
+}
+
+ul li {
+    list-style: none;
+}
+
+.wrapper {
+    font-size: 14px;
+    line-height: 1.42;
+    min-height: 100%;
+}
+
+.section {
+    margin-bottom: 50px;
+    display: flex;
+}
+
+.header__text {
+    font-size: 40px;
+    color: rgb(0, 128, 128);
+    font-weight: 700;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 300px;
+    text-align: center;
+}
+
+.header__img-photo {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+.header__img:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 5px 5px white inset;
+}
+
+.container {
+    margin: 0 auto;
+    position: relative;
+}
+
+.admin__reg {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    min-height: 440px;
+}
+
+.admin__reg-window {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 40px;
+    width: 300px;
+    height: 350px;
+    border: 4px solid #008080;
+    margin-right: 30px;
+}
+
+    .admin__reg-window:last-child {
+        margin-right: 0;
+    }
+
+.pet__lapka {
+    border: none;
+    width: 250px;
+}
+
+.petlapa {
+    padding: 0;
+    margin: 0;
+}
+
+.pet__lapka2 {
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+.admin__reg-header {
+    font-size: 20px;
+    text-align: center;
+    color: teal;
+    font-weight: 700;
+}
+
+.admin__login {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 100px 100px 100px;
+    justify-content: center;
+    padding: 0;
+}
+
+.pet__login {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+}
+
+.admin__login-text,
+.pet__login-text {
+    color: teal;
+}
+
+.admin__reg-input {
+    border-radius: 7px;
+    height: 15px;
+    background-color: #fafafa;
+    border: 0;
+    box-shadow: 0 0 4px #008080;
+    transition: .3s box-shadow;
+}
+
+    .admin__reg-input:hover {
+        box-shadow: 0 0 4px #008080;
+    }
+
+.textarea__input {
+    border-radius: 7px;
+    height: 75px;
+    background-color: #fafafa;
+    border: 2px solid rgb(0, 128, 128);
+    box-shadow: 0 0 4px #008080;
+    transition: .3s box-shadow;
+}
+
+    .textarea__input:hover {
+        box-shadow: 0 0 4px #008080;
+    }
+
+.btn__block {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 10px 0;
+    padding: 0;
+}
+
+.btn {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 30px;
+    position: relative;
+    border: 2px solid #008080;
+    color: #008080;
+    transition: .4s;
+}
+
+    .btn:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        border: 2px solid rgba(0, 0, 0, 0);
+        transition: .4s;
+    }
+
+    .btn:hover:after {
+        border-color: #008080;
+        width: calc(100% - 10px);
+        height: calc(100% + 10px);
+    }
+
+/*Секция с БД*/
+.bd {
+    margin-bottom: 20px;
+}
+
+.bd__stroka {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bd__zag {
+    width: 100px;
+    text-align: start;
+}
+
+.bd__yach {
+    width: 100px;
+    text-align: start;
+}
+
+table {
+    border-radius: 10px;
+}
+
+th {
+    /*Заголовок*/
+    background: #008080;
+    color: white;
+    padding: 10px 20px;
+}
+
+th,
+td {
+    border-style: solid;
+    border-width: 0 1px 5px 1px;
+    border-color: #008080;
+}
+
+    th:first-child {
+        border-top-left-radius: 10px;
+    }
+
+    th:last-child {
+        border-top-right-radius: 10px;
+    }
+
+td { /*Ячейки*/
+    padding: 10px 20px;
+    background: #ffffff;
+    color: #008080;
+}
+
+.btn__delete {
+    display: flex;
+    justify-content: center;
+}

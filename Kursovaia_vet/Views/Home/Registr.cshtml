@@ -1,0 +1,184 @@
+﻿<!--Ниже подключаем пространство имён из DTO, т.к. оно потребуется нам в данном представлении-->
+@using Kursovaiy_vet_DTO.Models;
+<!--Ниже задаем модель, объект которой это представление будет готово принять от контроллера-->
+<!--Модель в этот раз состоит не из одного списка, а из трёх списков (породы, владелец и диагноз)-->
+@model TableForBreedOwnerAndDiagnos;
+    <!--Ниже описан кусок кода, который будет выполняться, если в контроллере были предварительно добавлены данные в переменную TempData-->
+    <!--Переменная TempData является встроенным средством фреймворка ASP.NET, позволяющим передать данные из контроллера в представление-->
+    @if (null != TempData["alert"])
+    {
+        <script type="text/javascript">
+    alert('@TempData["alert"]');
+        </script>
+    }
+    <section class="section">
+        <div class="container">
+            <ul class="admin__reg">
+                <li class="admin__reg-window">
+                    <div class="admin__reg-header"> Add Pet</div>
+                    <!--В следующей строчке мы объявляем form аналогичную HTML коду, однако изменяем целевой путь на Home->AddPet-->
+                    @using (Html.BeginForm("AddPet", "Home", FormMethod.Post))
+                    {
+                        <ul class="pet__login">
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Name</div>
+                                <input type="text" name="name" value="" class="admin__reg-input">
+                            </li>
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Age</div>
+                                <input type="text" name="age" value="" class="admin__reg-input">
+                            </li>
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Breed</div>
+                                <input type="text" name="breed" value="" class="admin__reg-input">
+                            </li>
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Owner's Second Name</div>
+                                <input type="text" name="ownersname" value="" class="admin__reg-input">
+                            </li>
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Diagnosis</div>
+                                <input type="text" name="diagnosis" value="" class="admin__reg-input">
+                            </li>
+                        </ul>
+                        <div class="btn__block">
+                            <button class="btn">Add</button>
+                        </div>
+                    }
+                </li>
+                <li class="admin__reg-window">
+                    <div class="admin__reg-header"> Add Breed</div>
+                    <!--В следующей строчке мы объявляем form аналогичную HTML коду, однако изменяем целевой путь на Home->AddingBreed-->
+                    @using (Html.BeginForm("AddingBreed", "Home", FormMethod.Post))
+                    {
+                        <ul class="pet__login">
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Breed</div>
+                                <input type="text" name="breedname" value="" class="admin__reg-input">
+                            </li>
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Information</div>
+                                <textarea class="textarea__input" name="info"></textarea>
+                            </li>
+                        </ul>
+                        <div class="btn__block">
+                            <button class="btn">Add</button>
+                        </div>
+                    }
+                </li>
+                <li class="admin__reg-window">
+                    <div class="admin__reg-header"> Add Owner</div>
+                    <!--В следующей строчке мы объявляем form аналогичную HTML коду, однако изменяем целевой путь на Home->AddingOwner-->
+                    @using (Html.BeginForm("AddingOwner", "Home", FormMethod.Post))
+                    {
+                        <ul class="pet__login">
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Name</div>
+                                <input type="text" name="firstname" value="" class="admin__reg-input">
+                            </li>
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Second Name</div>
+                                <input type="text" name="secondname" value="" class="admin__reg-input">
+                            </li>
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Telefon</div>
+                                <input type="text" name="telefon" value="" class="admin__reg-input">
+                            </li>
+                        </ul>
+                        <div class="btn__block">
+                            <button class="btn">Add</button>
+                        </div>
+                    }
+                </li>
+                <li class="admin__reg-window">
+                    <div class="admin__reg-header"> Add Diagnosis</div>
+                    <!--В следующей строчке мы объявляем form аналогичную HTML коду, однако изменяем целевой путь на Home->AddingDiagnosis-->
+                    @using (Html.BeginForm("AddingDiagnosis", "Home", FormMethod.Post))
+                    {
+                        <ul class="pet__login">
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Name of the diagnosis</div>
+                                <input type="text" name="diagnosname" value="" class="admin__reg-input">
+                            </li>
+                            <li class="pet__login-info">
+                                <div class="pet__login-text">Severity of the diagnosis</div>
+                                <input type="text" name="diagnosseverity" value="" class="admin__reg-input">
+                            </li>
+                        </ul>
+                        <div class="btn__block">
+                            <button class="btn">Add</button>
+                        </div>
+                    }
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="header">
+                <div class="header__text">Current information</div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="bd">
+                <table class="bd__table">
+                    <tr class="bd__stroka">
+                        <th class="bd__zag">Breed</th>
+                        <th class="bd__zag">Information</th>
+                    </tr>
+                    <!--Для каждой породы из полученной от контроллера модели, мы отрисовываем строки таблицы-->
+                    @foreach (Breed breed in Model.Breeds)
+                    {
+                        <tr class="bd__stroka">
+                            <td class="bd__yach">@breed.BreedName</td>
+                            <td class="bd__yach">@breed.Information</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="bd">
+                <table class="bd__table">
+                    <tr class="bd__stroka">
+                        <th class="bd__zag">Name</th>
+                        <th class="bd__zag">Second Name</th>
+                        <th class="bd__zag">Telefon</th>
+                    </tr>
+                    <!--Для каждого клиента из полученной от контроллера модели, мы отрисовываем строки таблицы-->
+                    @foreach (Owner owner in Model.Owners)
+                    {
+                        <tr class="bd__stroka">
+                            <td class="bd__yach">@owner.FirstName</td>
+                            <td class="bd__yach">@owner.SecondName</td>
+                            <td class="bd__yach">@owner.Telefon</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="bd">
+                <table class="bd__table">
+                    <tr class="bd__stroka">
+                        <th class="bd__zag">Name of the diagnosis</th>
+                        <th class="bd__zag">Severity of the diagnosis</th>
+                    </tr>
+                    <!--Для каждого диагноза из полученной от контроллера модели, мы отрисовываем строки таблицы-->
+                    @foreach (Diagnosis diagnos in Model.Diagnoses)
+                    {
+                        <tr class="bd__stroka">
+                            <td class="bd__yach">@diagnos.DiagnosName</td>
+                            <td class="bd__yach">@diagnos.SeverityDiagnosis</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </section>

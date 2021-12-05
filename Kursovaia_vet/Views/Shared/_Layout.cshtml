@@ -1,0 +1,32 @@
+﻿<!--Шаблон страницы (её header), который будет использоваться на всех страницах веб-приложения-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Mystyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap" rel="stylesheet">
+    <title>Kurs_web</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container container__header">
+                <div class="header__text">Veterinary Clinic</div>
+                <div class="header__img">
+                    <img src="../images/klinika.jpg" class="header__img-photo"
+                         alt="klinika" class="logo__pic">
+                </div>
+            </div>
+        </header>
+        <div class="main__content">
+            <!--Вместо функции RenderBody(), фреймворк ASP.NET подставит необходимую веб-страницу-->
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
